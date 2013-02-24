@@ -13,10 +13,6 @@ import java.util.regex.*;
  *
  *
  */
-//TODO IP ADRESA + PORT V PRIKAZOVE RADCE
-//TODO : REKURZE PRI OSLOVENI
-//TOOD : SERVER POSLE SPATNY SOURADNICE
-//TODO : KLIENT MUSI BYT STABILNI PROTI NEOCEKAVANYM VSTUPUM???
 public class Robot {
 
     public static void main(String[] args) throws IOException {
@@ -60,7 +56,8 @@ public class Robot {
             }
             while (listening) {
                 Socket clientSocket = serverSocket.accept();
-
+                //if client is inactive for 60sec it disconnect it
+                serverSocket.setSoTimeout(60000);
                 new Thread(new Server(clientSocket)).start();
             }
 
